@@ -4,7 +4,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { HealthController } from './healthcheck.controller';
 
-import { NotificationModule } from '@notification/infrastructure/nestjs/notification.module';
+import { NotificationModule } from '@module/infrastructure/nestjs/module';
 
 @Module({
   imports: [

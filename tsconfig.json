@@ -11,14 +11,10 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@user/application/*": ["src/user/application/*"],
-      "@user/domain/*": ["src/user/domain/*"],
-      "@user/infrastructure/*": ["src/user/infrastructure/*"],
-      "@user/interfaces/*": ["src/user/interfaces/*"],
-      "@notification/application/*": ["src/notification/application/*"],
-      "@notification/domain/*": ["src/notification/domain/*"],
-      "@notification/infrastructure/*": ["src/notification/infrastructure/*"],
-      "@notification/interfaces/*": ["src/notification/interfaces/*"]
+      "@module/application/*": ["src/module/application/*"],
+      "@module/domain/*": ["src/module/domain/*"],
+      "@module/infrastructure/*": ["src/module/infrastructure/*"],
+      "@module/interfaces/*": ["src/module/interfaces/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

@@ -31,9 +31,7 @@ function enableSwagger(
 }
 
 async function bootstrap() {
-  
-  // const globalPrefix = process.env.APP_PREFIX || 'template-ms';
-  const globalPrefix = '';
+  const globalPrefix = process.env.APP_PREFIX || 'core';
   const folderSwagger = process.env.APP_SWAGGER || 'docs';
   const port = process.env.PORT || 3000;
   const logger = new Logger();
