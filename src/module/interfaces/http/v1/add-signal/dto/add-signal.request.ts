@@ -4,7 +4,7 @@ import {
 } from '../../../../../shared/utils';
 export class AddSignalRequestDTO {
   pair: string;
-  value: string;
+  value: number;
   signal: string;
   raw: string;
 
@@ -19,7 +19,7 @@ export class AddSignalRequestDTO {
       const rawArr = this.raw.split(',');
       this.signal = rawArr[0];
       this.pair = rawArr[1];
-      this.value = rawArr[2];
+      this.value = parseFloat(rawArr[2]);
 
       if (!validateNonNullNonEmptyString(this.signal)) {
         isErr = true;
@@ -29,13 +29,13 @@ export class AddSignalRequestDTO {
         isErr = true;
         message.push('Pair must be a non-null, non-empty string.');
       }
-      if (!isNumeric(this.value)) {
-        isErr = true;
-        message.push('Auth must be a non-null, non-empty string.');
-      }
+      //if (!isNumeric(rawArr[2])) {
+      //  isErr = true;
+      //  message.push('Value must be a number.');
+      //}
     } catch {
       isErr = true;
-      message.push('Subscription must be an valid object subscription.');
+      message.push('Signal must be valid.');
     }
     return {
       isErr,

@@ -5,15 +5,10 @@ import { HttpModule } from '@nestjs/axios';
 import { HealthController } from './healthcheck.controller';
 import { AppService } from './app.service';
 
-import { NotificationModule } from '@module/infrastructure/nestjs/module';
+import { NestModule } from '@module/infrastructure/nestjs/module';
 
 @Module({
-  imports: [
-    NotificationModule,
-    TerminusModule,
-    HttpModule,
-    ConfigModule.forRoot(),
-  ],
+  imports: [NestModule, TerminusModule, HttpModule, ConfigModule.forRoot()],
   controllers: [HealthController],
   providers: [AppService],
 })

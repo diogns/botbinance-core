@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean } from 'class-validator';
-//import { ListNotificationsResponseDTO } from '../../list-notifications/dto/list-notifications.response';
+//import { ListSignalsResponseDTO } from '../../list-notifications/dto/list-notifications.response';
 
-export class AddNotificationResponseDTO {
+export class AddSignalResponseDTO {
   @IsBoolean()
   @ApiProperty({ description: 'indicator of successfully operation' })
   success: boolean;
 
   @ApiProperty({ description: 'new notification data' })
-  notification: any; //ListNotificationsResponseDTO;
+  notification: any; //ListSignalsResponseDTO;
 
   constructor(success: boolean, notification: any) {
     this.success = success;

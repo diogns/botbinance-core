@@ -2,30 +2,23 @@ import { Logger, Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
 import {
-  NotificationQueriesImplement,
-  NotificationCommandsImplement,
-} from '@module/infrastructure/repositories/notification';
-import { AddNotificationsController } from '@module/interfaces/http/v1/add-signal/add-signal.controller';
-import { AddNotificationHandler } from '@module/application/commands/add-notification';
+  // SignalQueriesImplement,
+  SignalCommandsImplement,
+} from '@module/infrastructure/repositories/signal';
+import { AddSignalController } from '@module/interfaces/http/v1/add-signal/add-signal.controller';
+import { AddSignalHandler } from '@module/application/commands/add-signal';
 
 const infrastructure = [
-  NotificationQueriesImplement,
-  NotificationCommandsImplement,
+  // SignalQueriesImplement,
+  SignalCommandsImplement,
 ];
-const controllers = [AddNotificationsController];
+const controllers = [AddSignalController];
 const domain = [];
-const application = [AddNotificationHandler];
+const application = [AddSignalHandler];
 
 @Module({
   imports: [CqrsModule],
   controllers: [...controllers],
-  providers: [
-    Logger,
-    // NotificationGateway,
-    // MessageService,
-    ...infrastructure,
-    ...application,
-    ...domain,
-  ],
+  providers: [Logger, ...infrastructure, ...application, ...domain],
 })
-export class NotificationModule {}
+export class NestModule {}
