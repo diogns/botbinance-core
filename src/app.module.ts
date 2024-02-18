@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { HealthController } from './healthcheck.controller';
+import { AppService } from './app.service';
 
 import { NotificationModule } from '@module/infrastructure/nestjs/module';
 
@@ -14,6 +15,6 @@ import { NotificationModule } from '@module/infrastructure/nestjs/module';
     ConfigModule.forRoot(),
   ],
   controllers: [HealthController],
-  providers: [],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -18,7 +18,11 @@
     "test:cov": "jest --config jest.config.js --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config jest.config.e2e.js",
-    "test:e2e:cov": "jest --config jest.config.e2e.js --coverage"
+    "test:e2e:cov": "jest --config jest.config.e2e.js --coverage",
+    "migration:create": "typeorm-ts-node-esm migration:create ./src/migrations/$npm_config_name --outputJs",
+    "migration:generate": "typeorm-ts-node-esm migration:generate ./src/migrations/$npm_config_name --dataSource ./src/migrationsDataSource.ts --outputJs",
+    "migration:run": "typeorm-ts-node-esm migration:run --dataSource ./src/migrationsDataSource.ts",
+    "migration:revert": "typeorm-ts-node-esm migration:revert --dataSource ./src/migrationsDataSource.ts"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.430.0",
@@ -33,6 +37,7 @@
     "@nestjs/platform-ws": "^10.2.7",
     "@nestjs/swagger": "^7.1.8",
     "@nestjs/terminus": "^10.0.1",
+    "@nestjs/typeorm": "^10.0.2",
     "@nestjs/websockets": "^10.2.7",
     "@opentelemetry/auto-instrumentations-node": "^0.37.0",
     "@opentelemetry/exporter-trace-otlp-grpc": "^0.39.1",
@@ -44,11 +49,13 @@
     "@opentelemetry/sdk-trace-node": "^1.13.0",
     "@opentelemetry/semantic-conventions": "^1.13.0",
     "axios": "^1.4.0",
+    "mysql2": "^3.9.1",
     "neverthrow": "^6.0.0",
     "raw-body": "^2.5.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "socket.io": "^4.7.2",
+    "typeorm": "^0.3.20",
     "uuid": "^9.0.1",
     "websocket": "^1.0.34"
   },

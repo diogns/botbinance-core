@@ -1,55 +1,51 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, MinLength } from 'class-validator';
+import {
+  validateNonNullNonEmptyString,
+  isNumeric,
+} from '../../../../../shared/utils';
+export class AddSignalRequestDTO {
+  pair: string;
+  value: string;
+  signal: string;
+  raw: string;
 
-export class AddNotificationRequestDTO {
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(1)
-  @ApiProperty({ description: 'notification country iso' })
-  country: string;
+  constructor(raw: string) {
+    this.raw = raw;
+  }
 
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
-  @ApiProperty({ description: 'notification user group name' })
-  user_group: string;
+  validate(): any {
+    let isErr = false;
+    const message: string[] = [];
+    try {
+      const rawArr = this.raw.split(',');
+      this.signal = rawArr[0];
+      this.pair = rawArr[1];
+      this.value = rawArr[2];
 
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(1)
-  @ApiProperty({ description: 'notification app from' })
-  app: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
-  @ApiProperty({ description: 'notification title' })
-  title: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
-  @ApiProperty({ description: 'notification subtitle' })
-  subtitle: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
-  @ApiProperty({ description: 'notification message body' })
-  message: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty({ description: 'notification expiration time' })
-  exp: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty({ description: 'notification duration time' })
-  duration: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty({ description: 'notification extra params' })
-  extra_params: string;
+      if (!validateNonNullNonEmptyString(this.signal)) {
+        isErr = true;
+        message.push('Signal must be a non-null, non-empty string.');
+      }
+      if (!validateNonNullNonEmptyString(this.pair)) {
+        isErr = true;
+        message.push('Pair must be a non-null, non-empty string.');
+      }
+      if (!isNumeric(this.value)) {
+        isErr = true;
+        message.push('Auth must be a non-null, non-empty string.');
+      }
+    } catch {
+      isErr = true;
+      message.push('Subscription must be an valid object subscription.');
+    }
+    return {
+      isErr,
+      value: null,
+      message: {
+        status_code: isErr ? 400 : 200,
+        message,
+        error: isErr ? 'Bad Request.' : null,
+        error_code: isErr ? 'BAD_REQUEST' : null,
+      },
+    };
+  }
 }

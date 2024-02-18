@@ -14,7 +14,8 @@
       "@module/application/*": ["src/module/application/*"],
       "@module/domain/*": ["src/module/domain/*"],
       "@module/infrastructure/*": ["src/module/infrastructure/*"],
-      "@module/interfaces/*": ["src/module/interfaces/*"]
+      "@module/interfaces/*": ["src/module/interfaces/*"],
+      "@module/shared/*": ["src/module/shared/*"],
     },
     "incremental": true,
     "skipLibCheck": true,

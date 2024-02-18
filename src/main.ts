@@ -1,4 +1,6 @@
 import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
+
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import {
@@ -36,7 +38,9 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   const logger = new Logger();
 
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    rawBody: true,
+  });
 
   app.enableVersioning({
     type: VersioningType.URI,
@@ -47,6 +51,8 @@ async function bootstrap() {
   app.enableCors();
 
   app.setGlobalPrefix(globalPrefix);
+  app.useBodyParser('text');
+  // app.useBodyParser('json', { limit: '10mb' });
 
   enableSwagger(app, globalPrefix, folderSwagger);
 
