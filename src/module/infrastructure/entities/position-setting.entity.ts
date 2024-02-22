@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Index,
+} from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { PairEntity } from './pair.entity';
 
@@ -7,6 +13,7 @@ export class PositionSettingEntity {
   @PrimaryGeneratedColumn('increment')
   id!: number;
 
+  @Index({ unique: true })
   @Column({ type: 'varchar', length: 100 })
   flag!: string;
 

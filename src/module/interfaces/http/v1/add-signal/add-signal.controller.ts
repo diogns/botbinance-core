@@ -36,6 +36,8 @@ export class AddSignalController {
   })
   create(@Req() req: RawBodyRequest<Request>) {
     const raw = req.rawBody;
+    console.log(raw);
+    console.log(raw.toString());
     const addSignalRequest = new AddSignalRequestDTO(raw.toString());
     const addSignalRequestValidation = addSignalRequest.validate();
     if (addSignalRequestValidation.isErr) {

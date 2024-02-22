@@ -1,5 +1,5 @@
-module.exports = class initDatabase1708189441689 {
-  name = ' initDatabase1708189441689';
+module.exports = class initDatabase1708314450371 {
+  name = ' initDatabase1708314450371';
 
   async up(queryRunner) {
     await queryRunner.query(
@@ -12,7 +12,7 @@ module.exports = class initDatabase1708189441689 {
       `CREATE TABLE \`pair\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(100) NOT NULL, \`value\` float NOT NULL, UNIQUE INDEX \`IDX_de8fc370bdf3ab91a4d17a4ec4\` (\`name\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
     );
     await queryRunner.query(
-      `CREATE TABLE \`positionSetting\` (\`id\` int NOT NULL AUTO_INCREMENT, \`flag\` varchar(100) NOT NULL, \`stopLoss\` float NOT NULL, \`openPositions\` int NOT NULL, \`accountId\` int NULL, \`pairId\` int NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
+      `CREATE TABLE \`positionSetting\` (\`id\` int NOT NULL AUTO_INCREMENT, \`flag\` varchar(100) NOT NULL, \`stopLoss\` float NOT NULL, \`openPositions\` int NOT NULL, \`accountId\` int NULL, \`pairId\` int NULL, UNIQUE INDEX \`IDX_57e66bbd468caa06c7ec91e63e\` (\`flag\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
     );
     await queryRunner.query(
       `CREATE TABLE \`account\` (\`id\` int NOT NULL AUTO_INCREMENT, \`username\` varchar(100) NOT NULL, \`name\` varchar(100) NOT NULL, UNIQUE INDEX \`IDX_41dfcb70af895ddf9a53094515\` (\`username\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
@@ -60,6 +60,9 @@ module.exports = class initDatabase1708189441689 {
       `DROP INDEX \`IDX_41dfcb70af895ddf9a53094515\` ON \`account\``,
     );
     await queryRunner.query(`DROP TABLE \`account\``);
+    await queryRunner.query(
+      `DROP INDEX \`IDX_57e66bbd468caa06c7ec91e63e\` ON \`positionSetting\``,
+    );
     await queryRunner.query(`DROP TABLE \`positionSetting\``);
     await queryRunner.query(
       `DROP INDEX \`IDX_de8fc370bdf3ab91a4d17a4ec4\` ON \`pair\``,
